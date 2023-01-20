@@ -1,0 +1,76 @@
+<section>
+<div class="btn-box">
+  <button (click)="onAddBtnClick()" class="btn btn-success" >დამატება</button>
+</div>
+
+<div class="smt">
+  <div class="container horizontal-accordion">
+    <div class="card choice unset bg-primary text-white mx-2">
+      <div class="card-body">
+       
+        <form [formGroup]="userForm" (ngSubmit)="saveData()" >
+          <input type="text" class="form-control" id="inp1" formControlName="carNumber"
+          pattern="/[0-9\+\-\ ]/"
+          placeholder="მანქანის ნომერი">
+          <input type="text" class="form-control" id="inp2" formControlName="cardId" placeholder="ბარათის აიდი">
+          <button type="submit" (click)="closeExp()"  class="btnn btn btn-success ">დამატება</button>
+        </form>    
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mat-elevation-z8">
+    <div class="search-bar" >
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" (keyup)="filterData($event)"   placeholder="ძებნა">
+    </div>
+  
+      
+    </div>
+ 
+   <div class="table">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+     
+    
+
+      <ng-container matColumnDef="carNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>მანქანის ნომერი</th>
+          <td mat-cell *matCellDef="let element">{{element.carNumber}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="cardId">
+          <th mat-header-cell *matHeaderCellDef>ბარათის ნომერი</th>
+          <td mat-cell *matCellDef="let element">{{element.cardId}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="distance">
+          <th mat-header-cell *matHeaderCellDef>მანძილი</th>
+          <td mat-cell *matCellDef="let element">{{element.distance}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>თარიღი</th>
+          <td mat-cell *matCellDef="let element">{{element.date}}</td>
+        </ng-container>
+
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator
+  [pageSizeOptions]="[10, 20, 50, 100, 500]"
+  showFirstLastButtons
+  aria-label=""
+>
+</mat-paginator>
+
+   </div>
+</section>
+
+
+
