@@ -7,12 +7,18 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private http:HttpClient) { }
-  apiurl = 'http://localhost:3000/data';
+  apiurl = 'https://localhost:7157/api/home';
+  apiurl2 = 'http://localhost:3000/data';
 
   GetallData() {
-    return this.http.get(this.apiurl);
+    const data = {username: "beso", password: "beso2019"}
+    return this.http.post(this.apiurl,data);
   }
-  
+
+  // GetallData(){
+  //   return this.http.get(this.apiurl2)
+  // }
+
   addData(data: any) {
     return this.http.post(this.apiurl,data);
   }
