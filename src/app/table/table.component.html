@@ -1,32 +1,40 @@
+<section>
+  <div class="search-bar" >
+    <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="filterString" (keyup)="filterData()"  placeholder="ძებნა">
+  </div>
 
-<mat-accordion >
-  <mat-expansion-panel *ngFor="let item  of data">
-    <mat-expansion-panel-header style="display: flex; justify-content: space-between">
-      <mat-panel-title >
-        {{item.carName}}
-      </mat-panel-title> <mat-panel-title >
-      {{item.cardId}}
-    </mat-panel-title>
-    </mat-expansion-panel-header>
+  <article>
+    <mat-accordion  >
+      <h2>Car name</h2>
+      <mat-panel-title>Card ID</mat-panel-title>
+      <mat-expansion-panel *ngFor="let item  of filteredData" >
+        <mat-expansion-panel-header style="display: flex; justify-content: space-between">
+          <mat-panel-title class="carName">
+            {{item.carName}}
+          </mat-panel-title>
+          <mat-panel-title  class="cardId">
+            {{item.cardId}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <table class="table" >
-      <thead>
-      <tr>
-        <th  style="text-align: center" scope="col">Distance</th>
-        <th   style="text-align: center"  scope="col">Date Of Fill</th>
-      </tr>
-      </thead>
-      <tbody  >
-      <tr *ngFor="let subItem of item.userFuelHistories" >
-        <td style="text-align: center" *ngIf="subItem.distance < 1000 ">{{subItem.distance.toFixed(3)}} </td>
-        <td style="text-align: center" *ngIf="subItem.distance > 1000"> მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა </td>
-        <td  style="text-align: center">{{subItem.dateOfFill}}</td>
-      </tr>
-      </tbody>
-    </table>
+        <table class="table" >
+          <thead>
+          <tr>
+            <th  style="text-align: center" scope="col">Distance</th>
+            <th   style="text-align: center"  scope="col">Date Of Fill</th>
+          </tr>
+          </thead>
+          <tbody  >
+          <tr *ngFor="let subItem of item.userFuelHistories" >
+            <td style="text-align: center" *ngIf="subItem.distance < 1000 ">{{subItem.distance.toFixed(3)}} </td>
+            <td style="text-align: center" *ngIf="subItem.distance > 1000"> მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა </td>
+            <td  style="text-align: center">{{subItem.dateOfFill}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
 
-  </mat-expansion-panel>
-</mat-accordion>
+  </article>
 
-
-
+</section>

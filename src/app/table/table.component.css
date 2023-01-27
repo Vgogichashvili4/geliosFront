@@ -191,10 +191,18 @@
 /*    }*/
 /*}*/
 
-/*.search-bar {*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*}*/
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.search-bar input{
+  border: 1px solid black;
+  color: black;
+}
 
 tr.hide-table-padding td {
   padding: 0;
@@ -230,5 +238,33 @@ tr.hide-table-padding td {
   flex-direction: row;
 }
 
+ .carName{
+  position: absolute;
+  left: 64%;
+}
+
+.cardId{
+  position: absolute;
+  left: 15.5%;
+
+}
+
+section{
+  width: 99%;
+  margin: auto;
+}
+
+article{
+  margin-top: 3%}
 
 
+mat-expansion-panel{
+  position: relative;
+}
+
+
+
+mat-panel-title{
+  position: absolute;
+  top: 35%;
+}

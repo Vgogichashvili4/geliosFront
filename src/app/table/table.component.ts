@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort} from "@angular/material/sort";
+
 
 
 @Component({
@@ -28,18 +29,27 @@ export class TableComponent implements OnInit{
   allData:any[] = []
   @ViewChild(MatSort) matSort!:MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  originalData!:any
 
+   filterText: any;
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder){};
 
   ngOnInit(): void {
    this.getDataForDisplay()
+    this.filteredData = this.data;
+    this.filterData();
+
   }
+
+
 
   displayedColumns:any = ['distance', 'dateOfFill'];
   dataSource!:MatTableDataSource<any>;
   data!:any
   dataArr:any[] =[]
 
+  filterString: string = '';
+  filteredData: any[] = [];
 
 
   getDataForDisplay(){
@@ -61,38 +71,40 @@ export class TableComponent implements OnInit{
 
       this.dataSource = new MatTableDataSource(res);
       this.data = res
+      this.filteredData = res
+
+      this.originalData = this.data;
+
 
     })
   }
-
-  createBtnClick(){
-    this.router.navigate(['add-user'])
+  filterData() {
+    this.filteredData = this.data.filter((item:any) =>
+      item.carName.includes(this.filterString) || item.cardId.includes(this.filterString)
+    );
   }
 
 
-  filterData($event : any){
-    this.dataSource.filter = $event.target.value;
-}
+
+  // createBtnClick(){
+  //   this.router.navigate(['add-user'])
+  // }
 
 
-onAddBtnClick(){
-  const block = document.querySelector(".smt")
-  block?.classList.remove("smt")
 
-}
 
-userForm = this.builder.group({
-  carNumber: this.builder.control('',  [Validators.pattern("[0-9]{0-10}")]),
-  cardId: this.builder.control('', Validators.required),
-});
+// userForm = this.builder.group({
+//   carNumber: this.builder.control('',  [Validators.pattern("[0-9]{0-10}")]),
+//   cardId: this.builder.control('', Validators.required),
+// });
 
-saveData(){
-  console.log(this.userForm.value)
-  this.http.addData(this.userForm.value).subscribe((res:any)=>{
-    console.log("added")
-    this.getDataForDisplay()
-  })
-}
+// saveData(){
+//   console.log(this.userForm.value)
+//   this.http.addData(this.userForm.value).subscribe((res:any)=>{
+//     console.log("added")
+//     this.getDataForDisplay()
+//   })
+// }
 
 
 
