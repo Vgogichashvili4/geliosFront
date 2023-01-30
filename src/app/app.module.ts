@@ -9,14 +9,13 @@ import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgMaterialModule } from './ng-material.module';
-import { PipePipe } from './pipe.pipe';
-import {pipe} from "rxjs";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    PipePipe
+ 
   ],
   imports: [
     BrowserModule,
@@ -29,7 +28,7 @@ import {pipe} from "rxjs";
 
 
   ],
-  providers: [PipePipe],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
