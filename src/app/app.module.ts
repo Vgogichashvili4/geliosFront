@@ -9,12 +9,14 @@ import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgMaterialModule } from './ng-material.module';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
+    FilterPipe,
  
   ],
   imports: [

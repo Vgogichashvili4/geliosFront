@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,21 +23,17 @@ import {MatSort} from "@angular/material/sort";
 
 
 export class TableComponent implements OnInit{
-  panelOpenState = false;
-  response:any = []
-  allData:any[] = []
+ 
   @ViewChild(MatSort) matSort!:MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   originalData!:any
-  displayedColumns:any = ['distance', 'dateOfFill'];
+  displayedColumns = ['carName', 'cardId'];
   dataSource!:MatTableDataSource<any>;
   data!:any
   dataArr:any[] =[]
-  displayCount = 5;
-  filterString: string = '';
   filteredData: any[] = [];
-  filterText: any;
   userFuelHistories:any
+  expandedElement:any;
   user:any
 
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder,private activatedRoute:ActivatedRoute){};
@@ -48,13 +44,13 @@ export class TableComponent implements OnInit{
     const userName = this.user.userName;
     const password = this.user.password;
 });
-
+this.getDataForDisplay()
   }
 
   getDataForDisplay(){
     this.http.GetallData(this.user).subscribe((res:any) =>{
       for(let i=0; i<res.length;i++){
-     
+
         res[i].userFuelHistories.map((history:any) => {
           history.dateOfFill = history.dateOfFill.replace("T", " ");
         });
@@ -64,28 +60,21 @@ export class TableComponent implements OnInit{
           let dateB = Date.parse(b.dateOfFill);
           return dateB - dateA;
         });
-
-        this.dataArr.push(res[i].userFuelHistories);
       }
 
-      this.dataSource = new MatTableDataSource(res);
-      this.data = res
-      this.filteredData = res
-      
-      this.originalData = this.data;
-      this.originalData = res;
+      this.dataSource = new MatTableDataSource(res)
+      this.dataSource.paginator = this.paginator;
      
     })
   }
-  filterData() {
-    this.filteredData = this.data.filter((item:any) =>
-      item.carName.includes(this.filterString) || item.cardId.includes(this.filterString)  
-    ); 
+
+  @ViewChild('focus', { read: ElementRef })
+  tableInput!: ElementRef;
+scrollUp(): void {
+    setTimeout(() => this.tableInput.nativeElement.scrollIntoView({ behavior: 'smooth', block: "end" }));
+}
+
+  filterData($event: any) {
+    this.dataSource.filter = $event.target.value;
   }
-
-
-
-
-
-
 }

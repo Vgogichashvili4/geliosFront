@@ -1,45 +1,60 @@
-<section>
+<section >
   <div class="search-bar" >
-    <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="filterString" (keyup)="filterData()"  placeholder="ძებნა">
+    <input type="text" class="form-control" id="exampleInputEmail1"   (keyup)="filterData($event)"  placeholder="ძებნა">
   </div>
-  <article >
+  
+  <article>
+    <table mat-table
+  [dataSource]="dataSource" multiTemplateDataRows
+  class="mat-elevation-z8">
 
-    <mat-accordion>
-      <div class="headers">
-        <h2 style="margin-left: 15.6%">Card id</h2>
-        <h2 style="margin-left: 44.5%">Car name</h2>
-      </div>
-      <mat-expansion-panel *ngFor="let item of filteredData.slice(0, displayCount) let i=index">
-        <mat-expansion-panel-header style="display: flex; justify-content: space-between">
-          <mat-panel-title class="carName">
-            {{item.carName}}
-          </mat-panel-title>
-          <mat-panel-title class="cardId">
-            {{item.cardId}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+  <ng-container matColumnDef="carName">
+    <th mat-header-cell *matHeaderCellDef> Car Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.carName}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="cardId">
+    <th mat-header-cell *matHeaderCellDef> Card ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.cardId}} </td>
+  </ng-container>
+  
+  <!-- Expanded Content Column -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <div class="example-element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <table class="table">
-          <thead>
-            <tr class="tr">
-              <th  style="text-align: center" scope="col">Distance</th>
-              <th  class="date" scope="col">Date Of Fill</th>
+          <thead class="header">
+            <tr>
+              <th class="tt"  scope="col">Distance</th>
+              <th class="date" scope="col">Date Of Fill</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let subItem of item.userFuelHistories">
-              <td style="text-align: center" *ngIf="subItem.distance < 1000">{{subItem.distance.toFixed(3)}} </td>
-              <td style="text-align: center" *ngIf="subItem.distance > 1000">მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა</td>
-              <td class="date1" >{{subItem.dateOfFill}}</td>
+          <tbody class="body"> 
+            <tr *ngFor="let history of element.userFuelHistories">
+              <td class="distance"  *ngIf="history.distance < 1000">{{history.distance.toFixed(3)}} </td>
+              <td  style="text-align: center;" *ngIf="history.distance > 1000">მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა</td>
+              <td class="date1" >{{history.dateOfFill}}</td>
             </tr>
           </tbody>
         </table>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <div class="button">
-      <button style="border: 0;" (click)="displayCount = displayCount * 2"><img src="../../assets/icons8-plus.svg" alt="" srcset=""></button>
-    </div>
-    
-
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: ['carName', 'cardId']"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  
+</table>
+<mat-paginator  
+      [pageSizeOptions]="[10, 20, 50, 100, 500]"
+      showFirstLastButtons
+      aria-label=""
+    >
+    </mat-paginator>
   </article>
-
 </section>

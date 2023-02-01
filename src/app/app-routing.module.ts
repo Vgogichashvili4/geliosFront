@@ -4,7 +4,8 @@ import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
 
-  {component:TableComponent,path:"table/:userName/:password"}
+  // {component:TableComponent,path:"table/:userName/:password"}
+  {component:TableComponent,path:""}
 ];
 
 @NgModule({
