@@ -34,7 +34,8 @@ export class TableComponent implements OnInit{
   filteredData: any[] = [];
   userFuelHistories:any
   expandedElement:any;
-  user:any
+  user:any;
+  test =true
 
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder,private activatedRoute:ActivatedRoute){};
 
@@ -48,7 +49,8 @@ this.getDataForDisplay()
   }
 
   getDataForDisplay(){
-    this.http.GetallData(this.user).subscribe((res:any) =>{
+    this.http.GetallData().subscribe((res:any) =>{
+      this.test = false;
       for(let i=0; i<res.length;i++){
 
         res[i].userFuelHistories.map((history:any) => {

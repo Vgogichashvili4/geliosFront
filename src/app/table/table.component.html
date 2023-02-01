@@ -1,4 +1,9 @@
-<section >
+<div class="spinner">
+  <mat-spinner *ngIf="test"></mat-spinner>
+</div>
+
+
+<section>
   <div class="search-bar" >
     <input type="text" class="form-control" id="exampleInputEmail1"   (keyup)="filterData($event)"  placeholder="ძებნა">
   </div>
@@ -19,7 +24,7 @@
   </ng-container>
   
   <!-- Expanded Content Column -->
-  <ng-container matColumnDef="expandedDetail">
+  <ng-container matColumnDef="expandedDetail" >
     <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
       <div class="example-element-detail"
         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">

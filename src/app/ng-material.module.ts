@@ -15,6 +15,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -36,7 +38,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatCheckboxModule,
     MatExpansionModule,
     MatListModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
 
 
 ],
@@ -56,7 +59,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatCheckboxModule,
     MatExpansionModule,
     MatListModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
 
 
   ]
