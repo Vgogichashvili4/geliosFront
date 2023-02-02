@@ -29,6 +29,8 @@ export class TableComponent implements OnInit{
  
   @ViewChild(MatSort) matSort!:MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('focus', { read: ElementRef })
+  tableInput!: ElementRef;
   originalData!:any
   displayedColumns = ['carName', 'cardId'];
   dataSource!:MatTableDataSource<any>;
@@ -38,7 +40,7 @@ export class TableComponent implements OnInit{
   userFuelHistories:any
   expandedElement:any;
   user:any;
-  test =true
+  test = true
  
 
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder,private activatedRoute:ActivatedRoute){};
@@ -48,12 +50,13 @@ export class TableComponent implements OnInit{
     this.user = params;
     const userName = this.user.userName;
     const password = this.user.password;
+    console.log(this.user)
 });
 this.getDataForDisplay()
   }
 
   getDataForDisplay(){
-    this.http.GetallData().subscribe((res:any) =>{
+    this.http.GetallData(this.user).subscribe((res:any) =>{
       this.test = false;
       for(let i=0; i<res.length;i++){
 
@@ -74,11 +77,10 @@ this.getDataForDisplay()
     })
   }
 
-  @ViewChild('focus', { read: ElementRef })
-  tableInput!: ElementRef;
-scrollUp(): void {
-    setTimeout(() => this.tableInput.nativeElement.scrollIntoView({ behavior: 'smooth', block: "end" }));
-}
+
+  scrollUp(): void {
+      setTimeout(() => this.tableInput.nativeElement.scrollIntoView({ behavior: 'smooth', block: "end" }));
+  }
 
   filterData($event: any) {
     this.dataSource.filter = $event.target.value;
