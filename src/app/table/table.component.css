@@ -10,26 +10,30 @@
   display: flex;
 }
 
+.header{
+  position: relative;
+}
+
 
 .header .tt{
   position: relative;
-  left: 8.2%;
+  left: 5.9%;
 }
 
 
 .header .date{
   position: relative;
-  left: 9.1%;
+  left: 7.1%;
 }
 
 .body .distance{
   position: relative;
-  left: 8.1%;
+  left: 5.9%;
 }
 
 .body .date1{
   position: relative;
-  left: 9%;
+  left: 7.2%;
 }
 
 .search-bar {
@@ -39,13 +43,19 @@
   margin-left: 10px;
   margin-top: 20px;
   margin: auto;
-  padding-top: 20px;
- 
-  
+  padding-top: 30px;
+  position: relative;
 }
 
+.search-bar fa-icon{
+position: absolute;
+left: 90%;
+top: 58%;
+
+} 
+
 .search-bar input{
-  border: 1px solid black;
+  border: 1px solid rgb(20, 20, 150);
   color: black;
 }
 
@@ -103,13 +113,10 @@ article{
   margin-top: 3%
 }
 
-
-
 .expanded div{
   display: flex;
   flex-direction: row;
 }
-
 
 table {
   width: 100%;
@@ -165,7 +172,65 @@ th {
   vertical-align: middle !important;
   font-family: "Montserrat", sans-serif;
   font-family: "BPG Arial Caps", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+}
+
+th{
+  font-weight: 600;
+}
+
+
+.table td
+{
+  font-weight: normal;
+ 
+
+}
+
+.distance-span{
+  color: aliceblue;
+  background-color: #FF0000;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 5px solid #FF0000;
+}
+
+
+.non-distance-span{
+  color: black;
+  background-color: #FFF;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 5px solid #FFF;
 }
 
 
 
+
+@media screen and (max-width: 1200px) {
+  .search-bar fa-icon{
+    position: absolute;
+    left: 86%;
+    top: 58%;
+    } 
+}
+@media screen and (max-width: 900px) {
+  .search-bar fa-icon{
+    position: absolute;
+    left: 82%;
+    top: 58%;
+    } 
+}
+@media screen and (max-width: 700px) {
+
+  .search-bar{
+    width: 100px;
+  }
+  
+  .search-bar fa-icon{
+    position: absolute;
+    left: 76%;
+    top: 58%;
+    } 
+}

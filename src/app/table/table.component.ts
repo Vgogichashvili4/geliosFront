@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort} from "@angular/material/sort";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 
 @Component({
@@ -23,6 +25,7 @@ import {MatSort} from "@angular/material/sort";
 
 
 export class TableComponent implements OnInit{
+  faSearch = faSearch;
  
   @ViewChild(MatSort) matSort!:MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +39,7 @@ export class TableComponent implements OnInit{
   expandedElement:any;
   user:any;
   test =true
+ 
 
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder,private activatedRoute:ActivatedRoute){};
 
@@ -55,6 +59,7 @@ this.getDataForDisplay()
 
         res[i].userFuelHistories.map((history:any) => {
           history.dateOfFill = history.dateOfFill.replace("T", " ");
+
         });
 
         res[i].userFuelHistories.sort((a:any,b:any) => {
@@ -66,7 +71,6 @@ this.getDataForDisplay()
 
       this.dataSource = new MatTableDataSource(res)
       this.dataSource.paginator = this.paginator;
-     
     })
   }
 
@@ -79,4 +83,5 @@ scrollUp(): void {
   filterData($event: any) {
     this.dataSource.filter = $event.target.value;
   }
+
 }

@@ -2,44 +2,47 @@
   <mat-spinner *ngIf="test"></mat-spinner>
 </div>
 
-
 <section>
   <div class="search-bar" >
-    <input type="text" class="form-control" id="exampleInputEmail1"   (keyup)="filterData($event)"  placeholder="ძებნა">
+    <input type="text" class="form-control" id="exampleInputEmail1"   (keyup)="filterData($event)"  placeholder="ძებნა..." >
+    <fa-icon [icon]="faSearch"></fa-icon>
   </div>
-  
-  <article>
+
+      
+<article>
     <table mat-table
   [dataSource]="dataSource" multiTemplateDataRows
   class="mat-elevation-z8">
 
   <ng-container matColumnDef="carName">
-    <th mat-header-cell *matHeaderCellDef> Car Name </th>
+    <th mat-header-cell *matHeaderCellDef>მანქანის ნომერი</th>
     <td mat-cell *matCellDef="let element"> {{element.carName}} </td>
   </ng-container>
   
   <ng-container matColumnDef="cardId">
-    <th mat-header-cell *matHeaderCellDef> Card ID </th>
+    <th mat-header-cell *matHeaderCellDef>ბარათის ნომერი</th>
     <td mat-cell *matCellDef="let element"> {{element.cardId}} </td>
   </ng-container>
   
-  <!-- Expanded Content Column -->
+ 
   <ng-container matColumnDef="expandedDetail" >
     <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
       <div class="example-element-detail"
         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <table class="table">
-          <thead class="header">
+        <table class="table hight-distance"  >
+          <thead class="header" >
             <tr>
-              <th class="tt"  scope="col">Distance</th>
-              <th class="date" scope="col">Date Of Fill</th>
+              <th class="tt"  scope="col">მანძილი</th>
+              <th class="date" scope="col">ჩასხმის დრო</th>
             </tr>
           </thead>
           <tbody class="body"> 
-            <tr *ngFor="let history of element.userFuelHistories">
-              <td class="distance"  *ngIf="history.distance < 1000">{{history.distance.toFixed(3)}} </td>
-              <td  style="text-align: center;" *ngIf="history.distance > 1000">მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა</td>
-              <td class="date1" >{{history.dateOfFill}}</td>
+            <tr *ngFor="let history of element.userFuelHistories"  >
+              <td class="distance"  *ngIf="history.distance > 0.25 "><span class="distance-span">{{history.distance.toFixed(3)}} - km </span></td>
+              <td class="distance"  *ngIf="history.distance < 0.25 "><span class="non-distance-span">{{history.distance.toFixed(3)}} - km</span> </td>
+              <td style="text-align: center;" *ngIf="history.distance > 1000">მანქანის კოორდინატები კონკრეტულ დროში ვერ მოიძებნა</td>
+              <td class="date1" *ngIf="history.distance > 0.25" ><span class="distance-span">{{history.dateOfFill}}</span></td>
+              <td class="date1" *ngIf="history.distance < 0.25 " ><span class="non-distance-span">{{history.dateOfFill}}</span></td>
             </tr>
           </tbody>
         </table>

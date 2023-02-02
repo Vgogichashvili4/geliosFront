@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgMaterialModule } from './ng-material.module';
 import { FilterPipe } from './filter.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FilterPipe } from './filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgMaterialModule
+    NgMaterialModule,
+    FontAwesomeModule
 
 
   ],
