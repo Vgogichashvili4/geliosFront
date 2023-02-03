@@ -32,7 +32,7 @@ export class TableComponent implements OnInit{
   @ViewChild('focus', { read: ElementRef })
   tableInput!: ElementRef;
   originalData!:any
-  displayedColumns = ['carName', 'cardId'];
+  displayedColumns = ['carName', 'cardId', 'distance', 'dateOfFill'];
   dataSource!:MatTableDataSource<any>;
   data!:any
   dataArr:any[] =[]
@@ -45,19 +45,23 @@ export class TableComponent implements OnInit{
 
   constructor(private http:HttpService,private router:Router,private builder: FormBuilder,private activatedRoute:ActivatedRoute){};
 
+
   ngOnInit(): void {
    this.activatedRoute.params.subscribe((params:any) => {
     this.user = params;
     const userName = this.user.userName;
     const password = this.user.password;
     console.log(this.user)
+
 });
+
 this.getDataForDisplay()
   }
 
   getDataForDisplay(){
     this.http.GetallData(this.user).subscribe((res:any) =>{
       this.test = false;
+      
       for(let i=0; i<res.length;i++){
 
         res[i].userFuelHistories.map((history:any) => {
