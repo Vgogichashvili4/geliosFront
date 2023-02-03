@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private http:HttpClient) { }
-  apiurl = 'https://localhost:7157/api/home';
+  apiurl = 'https://distance.mygps.ge:7157/api/home';
   apiurl2 = 'http://localhost:3000/data';
 
   GetallData(data:any) {
     // const data = {username: "beso", password: "beso2019"}
-    return this.http.post(this.apiurl2,data);
+    return this.http.post(this.apiurl,data);
   }
 
   // GetallData(){

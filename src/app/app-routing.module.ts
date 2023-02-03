@@ -4,7 +4,7 @@ import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
 
-  {component:TableComponent,path:"table/:userName/:password"}
+  {component:TableComponent,path:"carDistance/:userName/:password"}
   // {component:TableComponent,path:""}
 ];
 

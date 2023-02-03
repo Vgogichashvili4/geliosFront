@@ -24,14 +24,24 @@
     <td mat-cell *matCellDef="let element">{{element.cardId}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="distance">
+  <ng-container *ngIf="userFuelHistories!=[]" matColumnDef="distance">
     <th mat-header-cell *matHeaderCellDef>მანძილი</th>
     <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0].distance.toFixed(3)}} - km</td>
   </ng-container>
   
-  <ng-container matColumnDef="dateOfFill">
+  <ng-container *ngIf="userFuelHistories!=[]" matColumnDef="dateOfFill">
     <th mat-header-cell *matHeaderCellDef>ჩასხმის დრო</th>
     <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0].dateOfFill}}</td>
+  </ng-container>
+
+  <ng-container *ngIf="userFuelHistories==[]" matColumnDef="distance">
+    <th mat-header-cell *matHeaderCellDef>მანძილი</th>
+    <td mat-cell *matCellDef="let element">ჩანაწერი არ მოიძებნა</td>
+  </ng-container>
+  
+  <ng-container *ngIf="userFuelHistories==[]" matColumnDef="dateOfFill">
+    <th mat-header-cell *matHeaderCellDef>ჩასხმის დრო</th>
+    <td mat-cell *matCellDef="let element">ჩანაწერი არ მოიძებნა</td>
   </ng-container>
   
  
