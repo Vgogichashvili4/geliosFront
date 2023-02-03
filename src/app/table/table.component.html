@@ -24,26 +24,18 @@
     <td mat-cell *matCellDef="let element">{{element.cardId}}</td>
   </ng-container>
 
-  <ng-container *ngIf="userFuelHistories!=[]" matColumnDef="distance">
+  <ng-container matColumnDef="distance">
     <th mat-header-cell *matHeaderCellDef>მანძილი</th>
-    <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0].distance.toFixed(3)}} - km</td>
+    <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0]?.distance.toFixed(3) || "ჩანაწერი ვერ მოიძებნა"}}</td>
   </ng-container>
   
-  <ng-container *ngIf="userFuelHistories!=[]" matColumnDef="dateOfFill">
+  <ng-container  matColumnDef="dateOfFill">
     <th mat-header-cell *matHeaderCellDef>ჩასხმის დრო</th>
-    <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0].dateOfFill}}</td>
+    <td mat-cell *matCellDef="let element">{{element.userFuelHistories[0]?.dateOfFill || "ჩანაწერი ვერ მოიძებნა"}}</td>
   </ng-container>
 
-  <ng-container *ngIf="userFuelHistories==[]" matColumnDef="distance">
-    <th mat-header-cell *matHeaderCellDef>მანძილი</th>
-    <td mat-cell *matCellDef="let element">ჩანაწერი არ მოიძებნა</td>
-  </ng-container>
-  
-  <ng-container *ngIf="userFuelHistories==[]" matColumnDef="dateOfFill">
-    <th mat-header-cell *matHeaderCellDef>ჩასხმის დრო</th>
-    <td mat-cell *matCellDef="let element">ჩანაწერი არ მოიძებნა</td>
-  </ng-container>
-  
+
+ 
  
   <ng-container matColumnDef="expandedDetail" >
     <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">

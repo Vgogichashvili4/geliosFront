@@ -61,9 +61,10 @@ this.getDataForDisplay()
   getDataForDisplay(){
     this.http.GetallData(this.user).subscribe((res:any) =>{
       this.test = false;
-      
       for(let i=0; i<res.length;i++){
+        res[1].userFuelHistories[0] .distance;
 
+       let arrayss = Array.from(res[i].userFuelHistories);
         res[i].userFuelHistories.map((history:any) => {
           history.dateOfFill = history.dateOfFill.replace("T", " ");
 
